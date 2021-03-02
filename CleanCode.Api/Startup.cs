@@ -1,7 +1,9 @@
 using CleanCode.Core.Contracts;
+using CleanCode.Core.Entities;
 using CleanCode.Infrastructure.Data;
 using CleanCode.Infrastructure.DataAccess;
 using CleanCode.Services;
+using CleanCode.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanCode.UI
+namespace CleanCode.Api
 {
     public class Startup
     {
@@ -30,17 +32,22 @@ namespace CleanCode.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanCode.UI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
             });
-            services.AddScoped<IEmployeesService, EmployeeService>();
+
+            services.AddDbContext<AppDbContext>();
+            services.AddScoped(typeof(IRepoBase<>), typeof(RepoBase<>));
+            services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
+            //services.AddScoped<IRepoBase<Employee>, RepoBase<Employee>>();
+            //services.AddScoped<IServiceBase<Employee>, ServiceBase<Employee>>();
+
+
             services.AddScoped<IEmployeesRepo, EmployeesSqliteRepo>();
-
-
+            services.AddScoped<IEmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +57,7 @@ namespace CleanCode.UI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CleanCode.UI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
             }
 
             app.UseHttpsRedirection();

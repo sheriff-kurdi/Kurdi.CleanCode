@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace CleanCode.Core.Contracts
 {
-    public interface IEmployeesRepo
+    public interface IEmployeesRepo : IRepoBase<Employee>
     {
-        void Create(Employee employee);
-        void Delete(Employee employee);
-        void Update(Employee newEmployee);
-        List<Employee> GetAll();
-        Employee GetById(int id);
-        List<Employee> GetWhere(Expression<Func<Employee, bool>> expression);
+    
+
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanCode.UI
+namespace CleanCode.Api
 {
     public class Program
     {
