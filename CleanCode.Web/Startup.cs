@@ -1,25 +1,19 @@
-using CleanCode.Core.Contracts;
-using CleanCode.Core.Entities;
-using CleanCode.Infrastructure.Data;
-using CleanCode.Infrastructure.DataAccess;
-using CleanCode.Services;
-using CleanCode.Services.Contracts;
+using CleanCode.Web.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanCode.Api
+namespace CleanCode.Web
 {
     public class Startup
     {
@@ -33,27 +27,15 @@ namespace CleanCode.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
-            });
-            //TODO Email Confirmation message;
-            services.AddDbContext<AppDbContext>();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-               .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
-
-            services.AddScoped(typeof(IRepoBase<>), typeof(RepoBase<>));
-            services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
-            //services.AddScoped<IRepoBase<Employee>, RepoBase<Employee>>();
-            //services.AddScoped<IServiceBase<Employee>, ServiceBase<Employee>>();
-
-
-            services.AddScoped<IEmployeesRepo, EmployeesSqliteRepo>();
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,19 +44,28 @@ namespace CleanCode.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
+                app.UseMigrationsEndPoint();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

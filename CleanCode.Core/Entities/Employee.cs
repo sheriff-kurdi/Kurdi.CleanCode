@@ -4,9 +4,9 @@ using System.Text;
 
 namespace CleanCode.Core.Entities
 {
-    public class Employee
+    public class Employee : BaseEntity
     {
-        public int Id { get; set; }
+        
         public string Name { get; set; }
         public double Salary { get; set; }
         public string Department { get; set; }

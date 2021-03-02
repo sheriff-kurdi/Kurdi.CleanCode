@@ -1,4 +1,5 @@
 ﻿
+using AutoMapper;
 using CleanCode.Core.Entities;
 using CleanCode.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +19,18 @@ namespace CleanCode.Api.Controllers
 
 
         private readonly IEmployeeService employeesService;
+        private readonly IMapper mapper;
 
-        public EmployeesController(IEmployeeService employeesService)
+        public EmployeesController(IEmployeeService employeesService, IMapper mapper)
         {
             this.employeesService = employeesService;
+            this.mapper = mapper;
         }
         // GET: api/<EmployeesController>
         [HttpGet]
-        public IQueryable<Employee> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+        public IQueryable<Infrastructure.DTOs.Employee> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            return employeesService.FindAll(pageSize, pageNumber);
+            return mapper.Map<IQueryable<Infrastructure.DTOs.Employee>>(employeesService.FindAll(pageSize, pageNumber));
         }
 
         // GET api/<EmployeesController>/5
