@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kurdi.CleanCode.Core\CleanCode.Core.csproj" />
-    <ProjectReference Include="..\Kurdi.CleanCode.Services\CleanCode.Services.csproj" />
+    <ProjectReference Include="..\Kurdi.CleanCode.Core\Kurdi.CleanCode.Core.csproj" />
+    <ProjectReference Include="..\Kurdi.CleanCode.Services\Kurdi.CleanCode.Services.csproj" />
   </ItemGroup>
 
 </Project>

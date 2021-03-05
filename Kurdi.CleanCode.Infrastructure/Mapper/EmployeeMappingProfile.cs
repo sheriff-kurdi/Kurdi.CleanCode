@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Kurdi.CleanCode.Infrastructure.DTOs;
+using System.Linq;
 
 namespace Kurdi.CleanCode.Infrastructure.Mapper
 {
@@ -11,7 +12,8 @@ namespace Kurdi.CleanCode.Infrastructure.Mapper
     {
         public EmployeeMappingProfile()
         {
-            CreateMap<Employee, EmployeeDTO>();
+            CreateMap<Employee, EmployeeDTO>().ReverseMap();
+            CreateMap<IQueryable<Employee>, IQueryable<EmployeeDTO>>().ReverseMap();
         }
     }
 }

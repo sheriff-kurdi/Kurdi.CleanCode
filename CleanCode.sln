@@ -3,18 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Core", "CleanCode.Core\CleanCode.Core.csproj", "{FA95D05B-8D06-4FB5-96CD-65AD37448CE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.Core", "Kurdi.CleanCode.Core\Kurdi.CleanCode.Core.csproj", "{FA95D05B-8D06-4FB5-96CD-65AD37448CE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Infrastructure", "CleanCode.Infrastructure\CleanCode.Infrastructure.csproj", "{4193C5B6-4CBB-443E-9BB7-1EF234B02800}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.Infrastructure", "Kurdi.CleanCode.Infrastructure\Kurdi.CleanCode.Infrastructure.csproj", "{4193C5B6-4CBB-443E-9BB7-1EF234B02800}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Services", "CleanCode.Services\CleanCode.Services.csproj", "{B7916578-FA82-44AE-B7FB-236FADB97A2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.Services", "Kurdi.CleanCode.Services\Kurdi.CleanCode.Services.csproj", "{B7916578-FA82-44AE-B7FB-236FADB97A2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Test", "CleanCode.Test\CleanCode.Test.csproj", "{BDE7752D-C7F5-4F10-BCAB-D2FBEB329A59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.Test", "Kurdi.CleanCode.Test\Kurdi.CleanCode.Test.csproj", "{BDE7752D-C7F5-4F10-BCAB-D2FBEB329A59}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Api", "CleanCode.Api\CleanCode.Api.csproj", "{120548F9-0357-48A2-A90F-C97E55322FA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.Api", "Kurdi.CleanCode.Api\Kurdi.CleanCode.Api.csproj", "{120548F9-0357-48A2-A90F-C97E55322FA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCode.Web", "CleanCode.Web\CleanCode.Web.csproj", "{479C1946-8764-474D-9EA1-2CE4DD24E9DC}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -30,9 +30,17 @@ namespace Kurdi.CleanCode.Api.Controllers
         }
         // GET: api/<EmployeesController>
         [HttpGet]
-        public IQueryable<EmployeeDTO> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+        public List<EmployeeDTO> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            return mapper.Map<IQueryable<EmployeeDTO>>(employeesService.FindAll(pageSize, pageNumber));
+            List<EmployeeDTO> emps = new List<EmployeeDTO>();
+            foreach (var emp in employeesService.FindAll(pageSize, pageNumber))
+            {
+                emps.Add(mapper.Map<EmployeeDTO>(emp));
+            
+            }
+            //TODO why not working
+            //IQueryable < EmployeeDTO > emps = mapper.Map<IQueryable<EmployeeDTO>>(employeesService.FindAll(pageSize, pageNumber));
+            return emps;
         }
 
         // GET api/<EmployeesController>/5
