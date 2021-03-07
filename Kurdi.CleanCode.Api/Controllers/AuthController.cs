@@ -10,6 +10,7 @@ namespace Kurdi.CleanCode.Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+
         [HttpPost]
         [Route("signIn")]
         public IActionResult SignIn([FromForm]  String userName, [FromForm] String password)
