@@ -11,27 +11,27 @@ namespace Kurdi.CleanCode.Infrastructure.DataAccess
 {
     public class RepoBase<T> : IRepoBase<T> where T : class
     {
-        private readonly AppDbContext db;
+        private readonly AppDbContext _db;
 
         public RepoBase(AppDbContext db)
         {
-            this.db = db;
+            this._db = db;
         }
         public void Create(T entity)
         {
-            db.Set<T>().Add(entity);
-            db.SaveChanges();
+            _db.Set<T>().Add(entity);
+            _db.SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            this.db.Set<T>().Remove(entity);
-            db.SaveChanges();
+            this._db.Set<T>().Remove(entity);
+            _db.SaveChanges();
         }
 
         public IQueryable<T> FindAll(int pageSize, int pageNumber)
         {
-            return this.db.Set<T>()
+            return this._db.Set<T>()
                 .AsNoTracking()
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
@@ -39,22 +39,22 @@ namespace Kurdi.CleanCode.Infrastructure.DataAccess
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, int pageSize, int pageNumber)
         {
-            return this.db.Set<T>().Where(expression)
+            return this._db.Set<T>().Where(expression)
                 .AsNoTracking()
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
         }
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return this.db.Set<T>().Where(expression).AsNoTracking();
+            return this._db.Set<T>().Where(expression).AsNoTracking();
         }
 
 
 
         public void Update(T entity)
         {
-            this.db.Set<T>().Update(entity);
-            db.SaveChanges();
+            this._db.Set<T>().Update(entity);
+            _db.SaveChanges();
         }
     }
 }

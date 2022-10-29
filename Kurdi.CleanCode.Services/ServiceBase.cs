@@ -10,40 +10,40 @@ namespace Kurdi.CleanCode.Services
 {
     public class ServiceBase <T> : IServiceBase<T>
     {
-        private readonly IRepoBase<T> repo;
+        private readonly IRepoBase<T> _repo;
 
         public ServiceBase(IRepoBase<T> repo)
         {
-            this.repo = repo;
+            this._repo = repo;
         }
         public void Create(T entity)
         {
-            repo.Create(entity);
+            _repo.Create(entity);
         }
 
         public void Delete(T entity)
         {
-            repo.Delete(entity);
+            _repo.Delete(entity);
         }
 
         public IQueryable<T> FindAll(int pageSize, int pageNumber)
         {
-            return repo.FindAll(pageSize,pageNumber);
+            return _repo.FindAll(pageSize,pageNumber);
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, int pageSize, int pageNumber)
         {
-            return repo.FindByCondition(expression, pageSize, pageNumber);
+            return _repo.FindByCondition(expression, pageSize, pageNumber);
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return repo.FindByCondition(expression);
+            return _repo.FindByCondition(expression);
         }
 
         public void Update(T entity)
         {
-            repo.Update(entity);
+            _repo.Update(entity);
         }
     }
 }

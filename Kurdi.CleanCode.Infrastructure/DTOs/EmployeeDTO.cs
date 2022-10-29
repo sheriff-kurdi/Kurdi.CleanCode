@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kurdi.CleanCode.Infrastructure.DTOs
 {
-    public class EmployeeDTO
+    public class EmployeeDto
     {
 
         public string Name { get; set; }

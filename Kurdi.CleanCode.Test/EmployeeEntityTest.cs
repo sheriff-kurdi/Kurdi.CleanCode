@@ -6,10 +6,10 @@ namespace Kurdi.CleanCode.Test
 {
     public class EmployeeEntityTest
     {
-        Employee employee;
+        Employee _employee;
         public EmployeeEntityTest()
         {
-             employee = new Employee()
+             _employee = new Employee()
              {
                  Name = "sheriff",
                  Department = "Accountitng",
@@ -23,9 +23,9 @@ namespace Kurdi.CleanCode.Test
             //prep
             double expectedSalary = 15;
             //act
-            employee.Promotion(5);
+            _employee.Promotion(5);
             //assert
-            Assert.Equal(expectedSalary, employee.Salary);
+            Assert.Equal(expectedSalary, _employee.Salary);
         }
 
         [Fact]
@@ -34,9 +34,9 @@ namespace Kurdi.CleanCode.Test
             //prep
             double expectedSalary = 5;
             //act
-            employee.Deduction(5);
+            _employee.Deduction(5);
             //assert
-            Assert.Equal(expectedSalary, employee.Salary);
+            Assert.Equal(expectedSalary, _employee.Salary);
         }
     }
 }

@@ -14,10 +14,10 @@ namespace Kurdi.CleanCode.Test
     public class BaseServiceTest
     {
 
-        Mock<IEmployeesRepo> employeesRepoMoc;
-        IEmployeeService employeesService;
-        IQueryable<Employee> employeesQuery;
-        List<Employee> employees = new List<Employee>()
+        Mock<IEmployeesRepo> _employeesRepoMoc;
+        IEmployeeService _employeesService;
+        IQueryable<Employee> _employeesQuery;
+        List<Employee> _employees = new List<Employee>()
         {
             new Employee(){Id = 1, Department="IT", Name= "sheriff", Salary = 10},
             new Employee(){Id = 2, Department="acc", Name= "maher", Salary = 5},
@@ -28,9 +28,9 @@ namespace Kurdi.CleanCode.Test
         
         public BaseServiceTest()
         {
-            employeesRepoMoc = new Mock<IEmployeesRepo>();
-            employeesService = new EmployeeService(employeesRepoMoc.Object);
-            employeesQuery  = employees.AsQueryable();
+            _employeesRepoMoc = new Mock<IEmployeesRepo>();
+            _employeesService = new EmployeeService(_employeesRepoMoc.Object);
+            _employeesQuery  = _employees.AsQueryable();
 
         }
 
@@ -42,12 +42,12 @@ namespace Kurdi.CleanCode.Test
         public void GetByIdTest(int employeeId)
         {
             //prepration
-            employeesRepoMoc.Setup(x => x.FindByCondition( e => e.Id == employeeId))
-                .Returns(employeesQuery.Where(e => e.Id == employeeId));
-            var expectedValue = employeesRepoMoc.Object.FindByCondition(e => e.Id == employeeId);
+            _employeesRepoMoc.Setup(x => x.FindByCondition( e => e.Id == employeeId))
+                .Returns(_employeesQuery.Where(e => e.Id == employeeId));
+            var expectedValue = _employeesRepoMoc.Object.FindByCondition(e => e.Id == employeeId);
 
             //Acction
-            var actualValue = employeesService.FindByCondition(e => e.Id == employeeId);
+            var actualValue = _employeesService.FindByCondition(e => e.Id == employeeId);
 
             //Assert
             Assert.Equal(expectedValue, actualValue);
@@ -57,11 +57,11 @@ namespace Kurdi.CleanCode.Test
         public void FindAllTest()
         {
             //prepration
-            employeesRepoMoc.Setup(x => x.FindAll(9, 1)).Returns(employeesQuery);
-            IQueryable<Employee> expectedValue = employeesRepoMoc.Object.FindAll(9, 1);
+            _employeesRepoMoc.Setup(x => x.FindAll(9, 1)).Returns(_employeesQuery);
+            IQueryable<Employee> expectedValue = _employeesRepoMoc.Object.FindAll(9, 1);
 
             //Acction
-            IQueryable<Employee> actualValue = employeesService.FindAll(9, 1);
+            IQueryable<Employee> actualValue = _employeesService.FindAll(9, 1);
 
             //Assert
             Assert.Equal(expectedValue, actualValue);
@@ -74,12 +74,12 @@ namespace Kurdi.CleanCode.Test
         public void FindByIdTest(int employeeId)
         {
             //prepration
-            employeesRepoMoc.Setup(x => x.FindByCondition(e => e.Id == employeeId))
-                .Returns(employeesQuery.Where(e => e.Id == employeeId));
-            IQueryable<Employee> expectedValue = employeesRepoMoc.Object.FindByCondition(e => e.Id == employeeId);
+            _employeesRepoMoc.Setup(x => x.FindByCondition(e => e.Id == employeeId))
+                .Returns(_employeesQuery.Where(e => e.Id == employeeId));
+            IQueryable<Employee> expectedValue = _employeesRepoMoc.Object.FindByCondition(e => e.Id == employeeId);
 
             //Acction
-            IQueryable<Employee> actualValue = employeesService.FindByCondition(e => e.Id == employeeId);
+            IQueryable<Employee> actualValue = _employeesService.FindByCondition(e => e.Id == employeeId);
 
             //Assert
             Assert.Equal(expectedValue, actualValue);
@@ -93,12 +93,12 @@ namespace Kurdi.CleanCode.Test
         public void FindByNameTest(string employeeName)
         {
             //prepration
-            employeesRepoMoc.Setup(x => x.FindByCondition(e => e.Name == employeeName))
-                .Returns(employeesQuery.Where(e => e.Name == employeeName));
-            IQueryable<Employee> expectedValue = employeesRepoMoc.Object.FindByCondition(e => e.Name == employeeName);
+            _employeesRepoMoc.Setup(x => x.FindByCondition(e => e.Name == employeeName))
+                .Returns(_employeesQuery.Where(e => e.Name == employeeName));
+            IQueryable<Employee> expectedValue = _employeesRepoMoc.Object.FindByCondition(e => e.Name == employeeName);
 
             //Acction
-            IQueryable<Employee> actualValue = employeesService.FindByCondition(e => e.Name == employeeName);
+            IQueryable<Employee> actualValue = _employeesService.FindByCondition(e => e.Name == employeeName);
 
             //Assert
             Assert.Equal(expectedValue, actualValue);
@@ -111,12 +111,12 @@ namespace Kurdi.CleanCode.Test
         public void GetWhereWithDepartmentTest(string employeeDep)
         {
             //prepration
-            employeesRepoMoc.Setup(x => x.FindByCondition(e => e.Department == employeeDep))
-                .Returns(employeesQuery.Where(e => e.Department == employeeDep));
-            IQueryable<Employee> expectedValue = employeesRepoMoc.Object.FindByCondition(e => e.Department == employeeDep);
+            _employeesRepoMoc.Setup(x => x.FindByCondition(e => e.Department == employeeDep))
+                .Returns(_employeesQuery.Where(e => e.Department == employeeDep));
+            IQueryable<Employee> expectedValue = _employeesRepoMoc.Object.FindByCondition(e => e.Department == employeeDep);
 
             //Acction
-            IQueryable<Employee> actualValue = employeesService.FindByCondition(e => e.Department == employeeDep);
+            IQueryable<Employee> actualValue = _employeesService.FindByCondition(e => e.Department == employeeDep);
 
             //Assert
             Assert.Equal(expectedValue, actualValue);

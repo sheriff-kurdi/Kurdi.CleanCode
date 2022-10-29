@@ -12,8 +12,8 @@ namespace Kurdi.CleanCode.Infrastructure.Mapper
     {
         public EmployeeMappingProfile()
         {
-            CreateMap<Employee, EmployeeDTO>().ReverseMap();
-            CreateMap<IQueryable<Employee>, IQueryable<EmployeeDTO>>().ReverseMap();
+            CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<IQueryable<Employee>, IQueryable<EmployeeDto>>().ReverseMap();
         }
     }
 }

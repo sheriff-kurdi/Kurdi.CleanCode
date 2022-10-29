@@ -18,6 +18,6 @@ namespace Kurdi.CleanCode.Infrastructure.Data
         
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //       => options.UseMySQL(configuration["db_conn"]);
-        public DbSet<Employee> employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
