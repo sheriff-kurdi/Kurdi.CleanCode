@@ -1,13 +1,18 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Kurdi.CleanCode.Core.Entities.Stock.Item;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kurdi.CleanCode.Core.Entities.Stock.Details
 {
+    [Owned]
     public class StockItemDetailsId
     {
         [Key]
-        public Language Language { get; set; }
+        [Column(name:"language_code")]
+        public string LanguageCode { get; set; }
         [Key]
-        public StockItem StockItem { get; set; }
+        [Column(name:"SKU")]
+        public StockItem SKU { get; set; }
     }
 }

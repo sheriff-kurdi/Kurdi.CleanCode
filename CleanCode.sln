@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.Test", "Kur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kurdi.CleanCode.EmailService", "Kurdi.CleanCode.EmailService\Kurdi.CleanCode.EmailService.csproj", "{D55F1C36-9EB3-4080-929E-0020CCF1038A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurdi.CleanCode.Api", "Kurdi.CleanCode.Api\Kurdi.CleanCode.Api\Kurdi.CleanCode.Api.csproj", "{7080E1CA-8C34-420E-BE38-2F89568391FF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurdi.CleanCode.Api", "Kurdi.CleanCode.Api\Kurdi.CleanCode.Api.csproj", "{C93E250A-CB9E-491E-9229-12BF18A84C7C}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{D55F1C36-9EB3-4080-929E-0020CCF1038A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D55F1C36-9EB3-4080-929E-0020CCF1038A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D55F1C36-9EB3-4080-929E-0020CCF1038A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7080E1CA-8C34-420E-BE38-2F89568391FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7080E1CA-8C34-420E-BE38-2F89568391FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7080E1CA-8C34-420E-BE38-2F89568391FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7080E1CA-8C34-420E-BE38-2F89568391FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C93E250A-CB9E-491E-9229-12BF18A84C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C93E250A-CB9E-491E-9229-12BF18A84C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C93E250A-CB9E-491E-9229-12BF18A84C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU

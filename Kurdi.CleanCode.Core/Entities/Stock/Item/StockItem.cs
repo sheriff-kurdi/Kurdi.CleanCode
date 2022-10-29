@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kurdi.CleanCode.Core.Entities.Stock.Details;
 
 namespace Kurdi.CleanCode.Core.Entities.Stock.Item
 {
@@ -12,6 +14,7 @@ namespace Kurdi.CleanCode.Core.Entities.Stock.Item
         public int SupplierIdentity { get; set; }
         public StockItemPrices StockItemPrices { get; set; }
         public StockItemQuantity StockItemQuantity { get; set; }
+        public List<StockItemDetails> StockItemDetails { get; set; }
         
         
     }
