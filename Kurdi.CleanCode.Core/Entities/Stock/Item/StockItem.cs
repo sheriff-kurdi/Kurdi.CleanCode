@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kurdi.CleanCode.Core.Entities.Stock.Item
 {
+    [Table(name:"stock_item")]
     public class StockItem
     {
         [Key]
