@@ -2,10 +2,8 @@
 using Kurdi.CleanCode.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Kurdi.CleanCode.Infrastructure.DataAccess
 {
@@ -20,13 +18,11 @@ namespace Kurdi.CleanCode.Infrastructure.DataAccess
         public void Create(T entity)
         {
             _db.Set<T>().Add(entity);
-            _db.SaveChanges();
         }
 
         public void Delete(T entity)
         {
             this._db.Set<T>().Remove(entity);
-            _db.SaveChanges();
         }
 
         public IQueryable<T> FindAll(int pageSize, int pageNumber)
@@ -54,6 +50,9 @@ namespace Kurdi.CleanCode.Infrastructure.DataAccess
         public void Update(T entity)
         {
             this._db.Set<T>().Update(entity);
+        }
+        public void SaveChanges()
+        {
             _db.SaveChanges();
         }
     }
