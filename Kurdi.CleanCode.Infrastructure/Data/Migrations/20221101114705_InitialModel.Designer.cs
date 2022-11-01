@@ -3,6 +3,7 @@ using System;
 using Kurdi.CleanCode.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221101114705_InitialModel")]
+    partial class InitialModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +23,6 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.CategoryAggregate.Category", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<bool>("IsParent")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_parent");
-
-                    b.Property<string>("ParentName")
-                        .HasColumnType("text")
-                        .HasColumnName("parent");
-
-                    b.Property<string>("parent")
-                        .HasColumnType("text")
-                        .HasColumnName("parent1");
-
-                    b.HasKey("Name");
-
-                    b.HasIndex("parent");
-
-                    b.ToTable("categories");
-                });
 
             modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.Employee", b =>
                 {
@@ -87,15 +64,11 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                     b.ToTable("languages");
                 });
 
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItem", b =>
+            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.Stock.StockItem", b =>
                 {
                     b.Property<string>("Sku")
                         .HasColumnType("text")
                         .HasColumnName("sku");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("text")
-                        .HasColumnName("category");
 
                     b.Property<int>("SupplierIdentity")
                         .HasColumnType("integer")
@@ -103,12 +76,10 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
 
                     b.HasKey("Sku");
 
-                    b.HasIndex("CategoryName");
-
                     b.ToTable("stock_items");
                 });
 
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItemDetails", b =>
+            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.Stock.StockItemDetails", b =>
                 {
                     b.Property<string>("LanguageCode")
                         .HasColumnType("text")
@@ -133,22 +104,9 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                     b.ToTable("stock_items_details");
                 });
 
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.CategoryAggregate.Category", b =>
+            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.Stock.StockItem", b =>
                 {
-                    b.HasOne("Kurdi.CleanCode.Core.Entities.CategoryAggregate.Category", "Parent")
-                        .WithMany()
-                        .HasForeignKey("parent");
-
-                    b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItem", b =>
-                {
-                    b.HasOne("Kurdi.CleanCode.Core.Entities.CategoryAggregate.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryName");
-
-                    b.OwnsOne("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItemPrices", "StockItemPrices", b1 =>
+                    b.OwnsOne("Kurdi.CleanCode.Core.Entities.Stock.StockItemPrices", "StockItemPrices", b1 =>
                         {
                             b1.Property<string>("StockItemSku")
                                 .HasColumnType("text");
@@ -177,7 +135,7 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                                 .HasForeignKey("StockItemSku");
                         });
 
-                    b.OwnsOne("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItemQuantity", "StockItemQuantity", b1 =>
+                    b.OwnsOne("Kurdi.CleanCode.Core.Entities.Stock.StockItemQuantity", "StockItemQuantity", b1 =>
                         {
                             b1.Property<string>("StockItemSku")
                                 .HasColumnType("text");
@@ -202,14 +160,12 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                                 .HasForeignKey("StockItemSku");
                         });
 
-                    b.Navigation("Category");
-
                     b.Navigation("StockItemPrices");
 
                     b.Navigation("StockItemQuantity");
                 });
 
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItemDetails", b =>
+            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.Stock.StockItemDetails", b =>
                 {
                     b.HasOne("Kurdi.CleanCode.Core.Entities.Language", "Language")
                         .WithMany()
@@ -217,7 +173,7 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItem", "StockItem")
+                    b.HasOne("Kurdi.CleanCode.Core.Entities.Stock.StockItem", "StockItem")
                         .WithMany("StockItemDetails")
                         .HasForeignKey("Sku")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -228,7 +184,7 @@ namespace Kurdi.CleanCode.Infrastructure.Data.Migrations
                     b.Navigation("StockItem");
                 });
 
-            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.StockAggregate.StockItem", b =>
+            modelBuilder.Entity("Kurdi.CleanCode.Core.Entities.Stock.StockItem", b =>
                 {
                     b.Navigation("StockItemDetails");
                 });

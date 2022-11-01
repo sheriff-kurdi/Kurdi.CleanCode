@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kurdi.CleanCode.Core.Entities.Stock.Item
+namespace Kurdi.CleanCode.Core.Entities.StockAggregate
 {
     [Owned]
     public class StockItemPrices

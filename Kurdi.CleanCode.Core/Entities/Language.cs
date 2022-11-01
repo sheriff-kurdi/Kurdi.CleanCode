@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kurdi.CleanCode.Core.Entities
 {
-    [Table(name:"language")]
+    [Table(name:"languages")]
     public class Language 
     {
         [Key]

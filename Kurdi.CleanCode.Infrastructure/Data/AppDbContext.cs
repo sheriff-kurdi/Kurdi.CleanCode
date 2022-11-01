@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Kurdi.CleanCode.Core.Entities;
-using Kurdi.CleanCode.Core.Entities.Stock.Details;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Kurdi.CleanCode.Core.Entities.Stock.Item;
+using Kurdi.CleanCode.Core.Entities.StockAggregate;
 using Microsoft.Extensions.Configuration;
 
 namespace Kurdi.CleanCode.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : DbContext
     {
         private readonly IConfiguration _configuration;
 
@@ -22,7 +20,7 @@ namespace Kurdi.CleanCode.Infrastructure.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<StockItemDetails>().HasKey(details => new { details.StockItemDetailsId.Language.LanguageCode, details.StockItemDetailsId.StockItem.Sku });
+            builder.Entity<StockItemDetails>().HasKey(details => new { details.LanguageCode, details.Sku });
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //       => options.UseMySQL(configuration["db_conn"]);
@@ -32,5 +30,8 @@ namespace Kurdi.CleanCode.Infrastructure.Data
         public DbSet<StockItemDetails> StockItemDetails { get; set; }
     }
 }
-//sudo dotnet ef migrations add InitialModel --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj -o Data/Migrations
+/***
+    sudo dotnet ef migrations add InitialModel --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj -o Data/Migrations
+    sudo dotnet ef database update  --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj 
+**/
 
