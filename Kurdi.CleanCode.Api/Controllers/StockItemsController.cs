@@ -1,7 +1,8 @@
 using Kurdi.CleanCode.Api.Requests;
-using Kurdi.CleanCode.Core.Entities.StockAggregate;
+using Kurdi.CleanCode.Infrastructure.DTOs;
 using Kurdi.CleanCode.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kurdi.CleanCode.Api.Controllers;
 
@@ -18,13 +19,35 @@ public class StockItemsController : Controller
     
     // GET: api/<StockItemsController>
     [HttpGet]
-    public List<StockItem> Get([FromQuery] StockItemsRequestParameters requestParameters)
+    public List<StockItemsDto> Get([FromQuery] StockItemsRequestParameters requestParameters)
     {
         var stockItems = _stockItemService.FindAll()
-            .Where(s => s.CategoryName == requestParameters.Category)
+            .Include(s => s.StockItemDetails)
+            
             .Skip(requestParameters.PageNumber)
             .Take(requestParameters.PageSize)
-            .ToList();
-        return stockItems;
+            .Select(s => new StockItemsDto()
+            {
+                Sku = s.Sku,
+                Name = s.StockItemDetails.FirstOrDefault(d => d.LanguageCode == "ar")!.Name,
+                Description = s.StockItemDetails.FirstOrDefault(d => d.LanguageCode == "ar")!.Description,
+                Category = s.CategoryName,
+                StockItemPrices = s.StockItemPrices,
+                StockItemQuantity = s.StockItemQuantity
+            });
+        
+        if (requestParameters.Sku != null)
+        {
+            stockItems = stockItems.Where(s => s.Sku == requestParameters.Sku);
+        }
+        if (requestParameters.Category != null)
+        {
+            stockItems = stockItems.Where(s => s.Category == requestParameters.Category);
+        }
+        if (requestParameters.Name != null)
+        {
+            stockItems = stockItems.Where(s => s.Name == requestParameters.Name);
+        }
+        return stockItems.ToList();
     }
 }

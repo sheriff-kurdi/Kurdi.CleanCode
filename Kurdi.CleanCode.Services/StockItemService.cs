@@ -16,9 +16,8 @@ public class StockItemService
         _stockItemsRepo = stockItemsRepo;
     }
 
-    public List<StockItem> FindAll()
+    public IQueryable<StockItem> FindAll()
     {
-        var s = _stockItemsRepo.FindAll().ToList();
-        return s;
+        return _stockItemsRepo.FindAll();
     }
 }
