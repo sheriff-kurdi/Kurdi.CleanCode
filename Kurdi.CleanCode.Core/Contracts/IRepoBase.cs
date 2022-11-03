@@ -9,6 +9,7 @@ namespace Kurdi.CleanCode.Core.Contracts
     public interface IRepoBase<T>
     {
         IQueryable<T> FindAll(int pageSize, int pageNumber);
+        IQueryable<T> FindAll();
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, int pageSize, int pageNumber);
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
 

@@ -16,7 +16,9 @@ namespace Kurdi.CleanCode.Infrastructure.Data
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             // connect to postgres with connection string from app settings
-            options.UseNpgsql(_configuration.GetConnectionString("WebApiDatabase"));
+            //options.UseNpgsql(_configuration.GetConnectionString("postgresDatabase"));
+            options.UseSqlServer(_configuration.GetConnectionString("sqlServerDatabase"));
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,7 +33,7 @@ namespace Kurdi.CleanCode.Infrastructure.Data
     }
 }
 /***
-    sudo dotnet ef migrations add InitialModel --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj -o Data/Migrations
-    sudo dotnet ef database update  --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj 
+     dotnet ef migrations add InitialModel --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj -o Data/Migrations
+     dotnet ef database update  --context AppDbContext -p ../Kurdi.CleanCode.Infrastructure/Kurdi.CleanCode.Infrastructure.csproj 
 **/
 

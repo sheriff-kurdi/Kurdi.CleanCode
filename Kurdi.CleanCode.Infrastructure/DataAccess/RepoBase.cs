@@ -32,6 +32,13 @@ namespace Kurdi.CleanCode.Infrastructure.DataAccess
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
         }
+        
+        public IQueryable<T> FindAll()
+        {
+            return this._db.Set<T>()
+                .AsNoTracking();
+        }
+
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, int pageSize, int pageNumber)
         {

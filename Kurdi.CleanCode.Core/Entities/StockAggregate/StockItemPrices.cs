@@ -7,20 +7,16 @@ namespace Kurdi.CleanCode.Core.Entities.StockAggregate
     [Owned]
     public class StockItemPrices
     {
+        private double _sellingPrice;
         [Column(name: "selling_price")]
         public double SellingPrice
         {
-            // ReSharper disable once FunctionRecursiveOnAllPaths
             get
             {
-                if (IsDiscounted) {return SellingPrice - Discount;}
-                else {return SellingPrice;}
+                if (IsDiscounted) {return _sellingPrice - Discount;}
+                else {return _sellingPrice;}
             }
-            set
-            {
-                if (value <= 0) throw new ArgumentOutOfRangeException(nameof(value));
-                SellingPrice = value;
-            }
+            set => _sellingPrice = value;
         }
 
         [Column(name:"cost_price")]
